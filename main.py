@@ -16,8 +16,8 @@ class MainWidget(BoxLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.pos_x = random.randint(0, 100) / 100
-        self.pos_y = random.randint(0, 100) / 100
+        self.pos_x = 0.45
+        self.pos_y = 0.45
         self.score = 0
 
     def on_button_press(self):
