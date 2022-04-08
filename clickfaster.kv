@@ -1,6 +1,12 @@
 
 <MainWidget>:
     orientation : 'vertical'
+    ProgressBar:
+        max: root.max_hourglass
+        value: root.max_hourglass-root.hourglass
+        size_hint: 1, None
+        height : dp(10)
+
     ScoreLabel:
         size_hint : 1, None
         height : dp(100)
