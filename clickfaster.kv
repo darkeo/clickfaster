@@ -1,0 +1,24 @@
+
+<MainWidget>:
+    orientation : 'vertical'
+    ProgressBar:
+        max: root.max_hourglass
+        value: root.max_hourglass-root.hourglass
+        size_hint: 1, None
+        height : dp(10)
+
+    ScoreLabel:
+        size_hint : 1, None
+        height : dp(100)
+        text: "SCORE : " + str(root.score)
+        font_name: "fonts/Minecraft.ttf"
+
+    FloatLayout:
+        ClickMeButton:
+            text: "click me ! "
+            font_name: "fonts/upheavtt.ttf"
+            size_hint: None, None
+            height: dp(100)
+            width: dp(100)
+            pos_hint : {'x':root.pos_x, 'y':root.pos_y}
+            on_press: root.on_button_press()
