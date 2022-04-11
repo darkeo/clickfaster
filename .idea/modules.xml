@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/Clickfaster.iml" filepath="$PROJECT_DIR$/.idea/Clickfaster.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/clickfaster.iml" filepath="$PROJECT_DIR$/.idea/clickfaster.iml" />
+>>>>>>> cc0a15194b8f19c269c0bbd63a98368522655fcd
     </modules>
   </component>
 </project>
