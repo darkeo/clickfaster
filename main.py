@@ -12,8 +12,6 @@ from kivy.uix.button import Button
 
 Builder.load_file("menu.kv")
 # temps de base, arbitraire pour l'instant
-base_time = 5
-
 
 class MainWidget(RelativeLayout):
     menu_widget = ObjectProperty()
@@ -41,7 +39,8 @@ class MainWidget(RelativeLayout):
         self.time_left = 0
         self.one_percent_decrease_threshold = 0
         self.one_percent_decrease = 0
-        self.timer_updated = base_time
+        self.timer_updated = 100
+        self.base_time = 1
         Clock.schedule_interval(self.update, 1.0 / 60)
 
     def reset_game(self):
@@ -56,12 +55,40 @@ class MainWidget(RelativeLayout):
         self.time_left = 0
         self.one_percent_decrease_threshold = 0
         self.one_percent_decrease = 0
-        self.timer_updated = base_time
+        self.timer_updated = self.base_time
 
-    def on_menu_button_pressed(self):
+    def on_menu_button_easy_pressed(self):
         #  print("bouton)
         # self.sound_music1.play()
         self.reset_game()
+        self.base_time = 7
+        self.timer_updated = self.base_time
+        # self.state_game_has_started = True
+        self.menu_widget.opacity = 0
+        # if self.first_game:
+        #     self.sound_begin.play()
+        # else:
+        #     self.sound_restart.play()
+
+    def on_menu_button_medium_pressed(self):
+        #  print("bouton)
+        # self.sound_music1.play()
+        self.reset_game()
+        self.base_time = 5
+        self.timer_updated = self.base_time
+        # self.state_game_has_started = True
+        self.menu_widget.opacity = 0
+        # if self.first_game:
+        #     self.sound_begin.play()
+        # else:
+        #     self.sound_restart.play()
+
+    def on_menu_button_hard_pressed(self):
+        #  print("bouton)
+        # self.sound_music1.play()
+        self.reset_game()
+        self.base_time = 3
+        self.timer_updated = self.base_time
         # self.state_game_has_started = True
         self.menu_widget.opacity = 0
         # if self.first_game:
@@ -74,7 +101,7 @@ class MainWidget(RelativeLayout):
         self.score += 1
         self.pos_x = random.randint(0, 85) / 100
         self.pos_y = random.randint(0, 85) / 100
-        self.time_to_click = self.timer(base_time)
+        self.time_to_click = self.timer(self.base_time)
         print("pouet")
 
     def timer(self, base_time):
@@ -84,7 +111,7 @@ class MainWidget(RelativeLayout):
         self.one_percent_decrease = 0
         self.loop = 0
         if self.score == 0:
-            return base_time
+            return self.timer_updated
         else:
             self.timer_updated -= self.timer_updated / 100
             return self.timer_updated
