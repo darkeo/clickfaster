@@ -1,6 +1,8 @@
+#:import menu menu
 
 <MainWidget>:
     orientation : 'vertical'
+    menu_widget: menu_widget
     ProgressBar:
         max: root.max_hourglass
         value: root.max_hourglass-root.hourglass
@@ -22,3 +24,5 @@
             width: dp(100)
             pos_hint : {'x':root.pos_x, 'y':root.pos_y}
             on_press: root.on_button_press()
+    MenuWidget:
+        id: menu_widget
