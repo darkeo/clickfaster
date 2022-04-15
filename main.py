@@ -1,5 +1,6 @@
 import kivy
 import random
+from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
 from kivy.app import App
 from kivy.properties import NumericProperty, StringProperty, ObjectProperty, Clock
@@ -11,6 +12,8 @@ from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 
 Builder.load_file("menu.kv")
+
+
 # temps de base, arbitraire pour l'instant
 
 class MainWidget(RelativeLayout):
@@ -26,8 +29,11 @@ class MainWidget(RelativeLayout):
     menu_button_title_medium = StringProperty("MEDIUM")
     menu_button_title_hard = StringProperty("HARD")
 
+    sound_shot = None
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.init_audio()
         self.pos_x = 0.45
         self.pos_y = 0.45
         self.score = 0
@@ -41,11 +47,12 @@ class MainWidget(RelativeLayout):
         self.one_percent_decrease = 0
         self.timer_updated = 100
         self.base_time = 1
-        Clock.schedule_interval(self.update, 1.0 / 60)
+        Clock.schedule_interval(self.update, 1.0 / 120)
 
     def reset_game(self):
         self.pos_x = 0.45
         self.pos_y = 0.45
+        self.menu_widget.opacity = 1
         self.score = 0
         self.time_to_click = 100000
         self.time_ticking = 0
@@ -56,6 +63,11 @@ class MainWidget(RelativeLayout):
         self.one_percent_decrease_threshold = 0
         self.one_percent_decrease = 0
         self.timer_updated = self.base_time
+
+    def init_audio(self):
+        self.sound_shot = SoundLoader.load("audio/shot.wav")
+
+        self.sound_shot.volume = 1
 
     def on_menu_button_easy_pressed(self):
         #  print("bouton)
@@ -97,10 +109,11 @@ class MainWidget(RelativeLayout):
         #     self.sound_restart.play()
 
     def on_button_press(self):
+        self.sound_shot.play()
         self.hourglass = 0
         self.score += 1
         self.pos_x = random.randint(0, 85) / 100
-        self.pos_y = random.randint(0, 85) / 100
+        self.pos_y = random.randint(10, 83) / 100
         self.time_to_click = self.timer(self.base_time)
         print("pouet")
 
