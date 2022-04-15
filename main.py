@@ -23,11 +23,12 @@ class MainWidget(RelativeLayout):
     score = NumericProperty()
     hourglass = NumericProperty()
     max_hourglass = NumericProperty()
-    menu_title = StringProperty("C  L  I  C  K  F  A  S  T  E  R")
+    menu_title = StringProperty("S  H  O  O  T  F  A  S  T  E  R")
     menu_button_title = StringProperty("START")
     menu_button_title_easy = StringProperty("EASY")
     menu_button_title_medium = StringProperty("MEDIUM")
     menu_button_title_hard = StringProperty("HARD")
+
 
     sound_shot = None
 
@@ -67,7 +68,7 @@ class MainWidget(RelativeLayout):
     def init_audio(self):
         self.sound_shot = SoundLoader.load("audio/shot.wav")
 
-        self.sound_shot.volume = 1
+        self.sound_shot.volume = 0.75
 
     def on_menu_button_easy_pressed(self):
         #  print("bouton)
@@ -142,6 +143,7 @@ class MainWidget(RelativeLayout):
 
         if self.time_left <= 0:
             print("game over")
+            self.menu_title = ("G  A  M  E    O  V  E  R")
             self.reset_game()
             # game over
 
